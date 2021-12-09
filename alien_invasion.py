@@ -1,6 +1,7 @@
-import sys
+import sys  # ends game on commands player
 
-import pygame
+import pygame  # contains functional
+
 
 class AlienInvision:
     """class for control resources and game behavior"""
