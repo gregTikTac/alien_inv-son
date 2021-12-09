@@ -10,7 +10,7 @@ class AlienInvasion:
         """init game and create game resources"""
         pygame.init()
 
-        self.screen = pygame.display.set_mode(1200, 800)  # call display (self.screen == surface)
+        self.screen = pygame.display.set_mode((1200, 800))  # call display (self.screen == surface)
         pygame.display.set_caption("Alien Invasion")
 
     def run_game(self):
