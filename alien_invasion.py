@@ -15,7 +15,7 @@ class AlienInvision:
 
     def run_game(self):
         """start loop_game"""
-        while True:
+        while True:     # event loop
             for event in pygame.event.get():  # tracking keyboard and mouse events
                 if event.type == pygame.QUIT:
                     sys.exit()
