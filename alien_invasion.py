@@ -12,3 +12,10 @@ class AlienInvision:
 
         self.screen = pygame.display.set_mode(1200, 800)  # call display (self.screen == surface)
         pygame.display.set_caption("Alien Invasion")
+
+    def run_game(self):
+        """start loop_game"""
+        while True:
+            for event in pygame.event.get():  # tracking keyboard and mouse events
+                if event.type == pygame.QUIT:
+                    sys.exit()
