@@ -15,7 +15,7 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode((self.setting.screen_width, self.setting.screen_height))
         self.screen = pygame.display.set_mode((1200, 800))  # call display (self.screen == surface)
         pygame.display.set_caption("Alien Invasion")
-        self.bg_color = (230, 230, 230)  # set window color
+        self.ship = Ship(self)  # create instance
 
     def run_game(self):
         """start loop_game"""
@@ -25,6 +25,8 @@ class AlienInvasion:
                     sys.exit()
 
             self.screen.fill(self.setting.bg_color)  # on each pass of the loop, color is drawn
+            self.ship.blitme()  # draw ship in window
+            
             """display the last drawn screen"""
             pygame.display.flip()
 
