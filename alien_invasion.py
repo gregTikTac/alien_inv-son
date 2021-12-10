@@ -1,6 +1,7 @@
 import sys  # ends game on commands player
 import pygame  # contains functional
 from setting import Setting
+from ship import Ship
 
 
 class AlienInvasion:
