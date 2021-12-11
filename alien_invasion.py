@@ -20,7 +20,8 @@ class AlienInvasion:
     def run_game(self):
         """start loop_game"""
         while True:
-            self._chek_events()  # call method
+            self._check_events()  # call method
+            self._update_screen()  # call method
 
             #  draw window
     def _check_events(self):
@@ -29,11 +30,13 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 sys.exit()
 
-            self.screen.fill(self.setting.bg_color)  # on each pass of the loop, color is drawn
-            self.ship.blitme()  # draw ship in window
-            
-            """display the last drawn screen"""
-            pygame.display.flip()
+    def _update_screen(self):
+        """update image and show new window"""
+        self.screen.fill(self.setting.bg_color)  # on each pass of the loop, color is drawn
+        self.ship.blitme()  # draw ship in window
+
+        """display the last drawn screen"""
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
