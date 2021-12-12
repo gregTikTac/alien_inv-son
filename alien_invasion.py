@@ -30,12 +30,16 @@ class AlienInvasion:
         for event in pygame.event.get():  # tracking keyboard and mouse events (pygame.event == access for events)
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:  # if push bottom (event=keydown)
+            elif event.type == pygame.KEYDOWN:  # if push bottom (event = key down)
                 if event.key == pygame.K_RIGHT:  # test bottom "->"
-                    self.ship.rect.x = True  # move ship right (if push bottom "->")
+                    self.ship.moving_right = True  # move ship right (if push bottom "->")
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = True
             elif event.type == pygame.KEYUP:  # if bottom is released
                 if event.key == pygame.K_RIGHT:  # "->"
                     self.ship.moving_right = False  # moving = false
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = False
 
     def _update_screen(self):
         """update image and show new window"""
