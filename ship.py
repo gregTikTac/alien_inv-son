@@ -8,6 +8,7 @@ class Ship():
         """init ship and sets starting position"""
         self.screen = ai_game.screen  # window assigned ship  to make it easier to handle
         self.screen_rect = ai_game.screen.get_rect()  # allows you to place the ship in the desired position
+        self.settings = ai_game.settings  # create attribute Setting, for use def update
 
         # loading img ship and  receive  rectangle
         self.image = pygame.image.load('images/ship.bmp')  # load img
@@ -16,6 +17,9 @@ class Ship():
         # each ship appears at the bottom of the screen
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # saving float koordinat ship
+        self.x = float(self.rect.x)
+
         # flag for moving
         self.moving_right = False
         self.moving_left = False
@@ -23,9 +27,12 @@ class Ship():
     def update(self):
         """updates the ship's position with the flag"""
         if self.moving_right:
-            self.rect.x += 1
+            self.rect.x += self.settings.ship_speed  # update atr x, but no rect
         if self.moving_left:
-            self.rect.x -= 1
+            self.rect.x -= self.settings.ship_speed
+
+        # update atr rect
+        self.rect = self.x
 
     def blitme(self):
         """draw ship in current position"""
