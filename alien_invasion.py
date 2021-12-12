@@ -21,6 +21,7 @@ class AlienInvasion:
         """start loop_game"""
         while True:
             self._check_events()  # call method
+            self.ship.update()
             self._update_screen()  # call method
 
             #  draw window
@@ -31,7 +32,10 @@ class AlienInvasion:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:  # if push bottom (event=keydown)
                 if event.key == pygame.K_RIGHT:  # test bottom "->"
-                    self.ship.rect.x += 1  # move ship right
+                    self.ship.rect.x = True  # move ship right (if push bottom "->")
+            elif event.type == pygame.KEYUP:  # if bottom is released
+                if event.key == pygame.K_RIGHT:  # "->"
+                    self.ship.moving_right = False  # moving = false
 
     def _update_screen(self):
         """update image and show new window"""
