@@ -1,6 +1,6 @@
 import sys  # ends game on commands player
 import pygame  # contains functional
-from setting import Setting
+from settings import Settings
 from ship import Ship
 
 
@@ -10,9 +10,9 @@ class AlienInvasion:
     def __init__(self):
         """init game and create game resources"""
         pygame.init()
-        self.setting = Setting()  # instance class Setting
+        self.settings = Settings()  # instance class Setting
 
-        self.screen = pygame.display.set_mode((self.setting.screen_width, self.setting.screen_height))
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         self.screen = pygame.display.set_mode((1200, 800))  # call display (self.screen == surface)
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)  # create instance
@@ -30,11 +30,12 @@ class AlienInvasion:
         for event in pygame.event.get():  # tracking keyboard and mouse events (pygame.event == access for events)
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:  # if push bottom (event = key down)
+            elif event.type == pygame.KEYDOWN:  # if push bottom (event = keydown)
                 if event.key == pygame.K_RIGHT:  # test bottom "->"
                     self.ship.moving_right = True  # move ship right (if push bottom "->")
                 elif event.key == pygame.K_LEFT:
                     self.ship.moving_left = True
+
             elif event.type == pygame.KEYUP:  # if bottom is released
                 if event.key == pygame.K_RIGHT:  # "->"
                     self.ship.moving_right = False  # moving = false
@@ -43,7 +44,7 @@ class AlienInvasion:
 
     def _update_screen(self):
         """update image and show new window"""
-        self.screen.fill(self.setting.bg_color)  # on each pass of the loop, color is drawn
+        self.screen.fill(self.settings.bg_color)  # on each pass of the loop, color is drawn
         self.ship.blitme()  # draw ship in window
 
         """display the last drawn screen"""
