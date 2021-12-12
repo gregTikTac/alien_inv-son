@@ -29,6 +29,9 @@ class AlienInvasion:
         for event in pygame.event.get():  # tracking keyboard and mouse events (pygame.event == access for events)
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:  # if push bottom (event=keydown)
+                if event.key == pygame.K_RIGHT:  # test bottom "->"
+                    self.ship.rect.x += 1  # move ship right
 
     def _update_screen(self):
         """update image and show new window"""
