@@ -26,7 +26,14 @@ class AlienInvasion:
             self._check_events()  # call method
             self.ship.update()
             self.bullets.update()  # for everyone bullets
+
+            # remove bullet over the edge
+            for bullet in self.bullets.copy():  # change in lst_bullets
+                if bullet.rect.bottom <= 0:  # if bullet over the edge
+                    self.bullets.remove(bullet)  # remove bullet
+
             self._update_screen()  # call method
+
 
     def _check_events(self):
         """handles keystrokes and mouse events"""
