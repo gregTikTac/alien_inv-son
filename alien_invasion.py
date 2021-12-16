@@ -25,13 +25,7 @@ class AlienInvasion:
         while True:
             self._check_events()  # call method
             self.ship.update()
-            self.bullets.update()  # for everyone bullets
-
-            # remove bullet over the edge
-            for bullet in self.bullets.copy():  # change in lst_bullets
-                if bullet.rect.bottom <= 0:  # if bullet over the edge
-                    self.bullets.remove(bullet)  # remove bullet
-
+            self._update_bullets()
             self._update_screen()  # call method
 
     def _check_events(self):
@@ -67,6 +61,14 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:  # number bullets on the screen
             new_bullet = Bullet(self)  # exzempliar bullet
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """update bullet position and remove old bullets"""
+        self.bullets.update()  # for everyone bullets
+        # remove bullet over the edge
+        for bullet in self.bullets.copy():  # change in lst_bullets
+            if bullet.rect.bottom <= 0:  # if bullet over the edge
+                self.bullets.remove(bullet)  # remove bullet
 
     def _update_screen(self):
         """update image and show new window"""
