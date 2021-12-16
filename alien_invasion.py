@@ -34,7 +34,6 @@ class AlienInvasion:
 
             self._update_screen()  # call method
 
-
     def _check_events(self):
         """handles keystrokes and mouse events"""
         for event in pygame.event.get():  # tracking keyboard and mouse events (pygame.event == access for events)
