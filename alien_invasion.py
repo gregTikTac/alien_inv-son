@@ -2,6 +2,7 @@ import sys  # ends game on commands player
 import pygame  # contains functional
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AlienInvasion:
@@ -17,22 +18,23 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)  # create instance
+        self.bullets = pygame.sprite.Group()  # bullet group
 
     def run_game(self):
         """start loop_game"""
         while True:
             self._check_events()  # call method
             self.ship.update()
+            self.bullets.update()  # for everyone bullets
             self._update_screen()  # call method
 
-            #  draw window
     def _check_events(self):
         """handles keystrokes and mouse events"""
         for event in pygame.event.get():  # tracking keyboard and mouse events (pygame.event == access for events)
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:  # if push bottom (event = keydown)
-               self._check_keydown_events(event)
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
 
@@ -44,6 +46,8 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:  # "space" for shots
+            self._fire_bullet()
 
     def _check_keyup_events(self, event):
         "Reacts when keys are released"
@@ -52,14 +56,18 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    def _fire_bullet(self):
+        """create new bullet and adding in group bullets"""
+        new_bullet = Bullet(self)  # exzempliar bullet
+        self.bullets.add(new_bullet)
 
     def _update_screen(self):
         """update image and show new window"""
         self.screen.fill(self.settings.bg_color)  # on each pass of the loop, color is drawn
         self.ship.blitme()  # draw ship in window
-
-        """display the last drawn screen"""
-        pygame.display.flip()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+        pygame.display.flip()  # display the last drawn screen"
 
 
 if __name__ == '__main__':

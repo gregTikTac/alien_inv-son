@@ -13,21 +13,21 @@ class Bullet(Sprite):
         self.color = ai_game.settings.bullet_color
 
         # create bullet in position (0,0) and assigned the correct position
-        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.screen_height)  # rect=position bullet\
+        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)  # rect=position bullet\
         # pygame.Rect = create bullet from koordinat 0
 
-        self.rect.midbottom = ai_game.ship.rect.midtop  # midtop bullet == midtop ship
+        self.rect.midtop = ai_game.ship.rect.midtop  # midtop bullet == midtop ship
 
         # bullet position saved in float format
         self.y = float(self.rect.y)
 
-        def update(self):
-            """moving bullet up on the screen"""
-            # update bullet position in float format
-            self.y -= self.settings.bullet_speed
-            # update rectangle position
-            self.rect.y = self.y
+    def update(self):
+        """moving bullet up on the screen"""
+        # update bullet position in float format
+        self.y -= self.settings.bullet_speed
+        # update rectangle position
+        self.rect.y = self.y
 
-        def draw_bullet(self):
-            """output bullet on the screen"""
-            pygame.draw.rect(self.screen, self.color, self.rect)
+    def draw_bullet(self):
+        """output bullet on the screen"""
+        pygame.draw.rect(self.screen, self.color, self.rect)
