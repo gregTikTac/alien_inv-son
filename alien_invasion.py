@@ -3,6 +3,7 @@ import pygame  # contains functional
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class AlienInvasion:
@@ -19,6 +20,8 @@ class AlienInvasion:
 
         self.ship = Ship(self)  # create instance
         self.bullets = pygame.sprite.Group()  # bullet group
+        self.aliens = pygame.sprite.Group()
+        self._create_fleet()
 
     def run_game(self):
         """start loop_game"""
@@ -70,12 +73,19 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:  # if bullet over the edge
                 self.bullets.remove(bullet)  # remove bullet
 
+    def _create_fleet(self):
+        """create fleet"""
+        # Create alien
+        alien = Alien(self)
+        self.aliens.add(alien)
+
     def _update_screen(self):
         """update image and show new window"""
         self.screen.fill(self.settings.bg_color)  # on each pass of the loop, color is drawn
         self.ship.blitme()  # draw ship in window
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
         pygame.display.flip()  # display the last drawn screen"
 
 
