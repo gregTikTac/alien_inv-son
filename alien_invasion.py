@@ -77,19 +77,27 @@ class AlienInvasion:
         """create fleet"""
         # Create alien
         alien = Alien(self)
-        alien_width = alien.rect.width
-        availibale_space_x = self.settings.screen_width - (2 * alien_width)  # acces gorizont space\
-        number_aliens_x = availibale_space_x // (2 * alien_width)  # how many aliens
-        for alien_number in range(number_aliens_x):
-            self._create_alien(alien_number)
+        alien_width, alien_height = alien.rect.size  # whidth and height alien
+        available_space_x = self.settings.screen_width - (2 * alien_width)  # acces gorizont space\
+        number_aliens_x = available_space_x // (2 * alien_width)  # how many aliens
 
-    def _create_alien(self, alien_number):
+        """defines how mat rows in the screen"""
+        ship_height = self.ship.rect.height
+        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)  # how many rowsInTheScreen
+        numbers_rows = available_space_y // (2 * alien_height)
+        # create fleet
+        for row_number in range(numbers_rows):  # repeat (create one row) = numbers rows
+            for alien_number in range(number_aliens_x):  # create one row
+                self._create_alien(alien_number, row_number)
+
+    def _create_alien(self, alien_number, row_number):
         """create alien and search his position on row"""
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number  # x is alien_position
         # everyone alien shifts one width from the left margin
         alien.rect.x = alien.x
+        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number  # if alien notInTheFirstRow(change koord)
         self.aliens.add(alien)
 
 
