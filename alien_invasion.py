@@ -77,7 +77,18 @@ class AlienInvasion:
         """create fleet"""
         # Create alien
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width = alien.rect.width
+        availibale_space_x = self.settings.screen_width - (2 * alien_width)  # acces gorizont space\
+        number_aliens_x = availibale_space_x // (2 * alien_width)  # how many aliens
+
+        for alien_number in range(number_aliens_x):
+            # create alien and search his position on row
+            alien = Alien(self)
+            # everyone alien shifts one width from the left margin
+            alien.x = alien_width + 2 * alien_width * alien_number  # x is alien_position
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
+
 
     def _update_screen(self):
         """update image and show new window"""
